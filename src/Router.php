@@ -103,12 +103,13 @@ class Router {
     }
 
     /**
-     * @param  string $method
-     * @param  string $uri
-     * @param  array  $data
-     * @param  array  $headers
-     * @param  string $content
-     * @return \Illuminate\Http\Response
+     * @param $method
+     * @param $uri
+     * @param array $data
+     * @param array $headers
+     * @param null $content
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function singleRequest($method, $uri, array $data = [], array $headers = [], $content = null)
     {
@@ -137,7 +138,7 @@ class Router {
             $currentRequest->cookies->all(),
             $currentRequest->files->all(),
             $currentRequest->server->all(),
-            $currentRequest->content
+            $currentRequest->getContent()
         );
 
         return $response;
@@ -160,12 +161,13 @@ class Router {
     }
 
     /**
-     * @param  string $method
-     * @param  string $uri
-     * @param  array  $data
-     * @param  array  $headers
-     * @param  string $content
-     * @return \Illuminate\Http\Response
+     * @param $method
+     * @param $uri
+     * @param array $data
+     * @param array $headers
+     * @param null $content
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     private function request($method, $uri, array $data = [], array $headers = [], $content = null)
     {
@@ -179,12 +181,12 @@ class Router {
     }
 
     /**
-     * @param  string $method
-     * @param  string $uri
-     * @param  array  $data
-     * @param  array  $headers
-     * @param  string $content
-     * @return \Illuminate\Http\Request
+     * @param $method
+     * @param $uri
+     * @param array $data
+     * @param array $headers
+     * @param null $content
+     * @return Request
      */
     private function createRequest($method, $uri, array $data = [], array $headers = [], $content = null)
     {
